@@ -11,5 +11,9 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 
+	app.Get("/user", func(c *fiber.Ctx) error {
+		return c.SendString("Hi, user")
+	})
+
 	app.Listen(":3000")
 }
