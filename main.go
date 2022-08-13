@@ -4,15 +4,19 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
+
+	"github.com/gofiber/template/html"
 )
 
 func main() {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		Views: html.New("./views", ".html"),
+	})
 
 	app.Static("/", "./public")
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
+		return c.Render("index", fiber.Map{})
 	})
 
 	app.Get("/user", func(c *fiber.Ctx) error {
